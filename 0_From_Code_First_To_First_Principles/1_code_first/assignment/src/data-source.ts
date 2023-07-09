@@ -1,8 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { User } from "./entity/User";
+import { User } from "./models/User";
 
-console.log('dbpassword: ' + process.env.DATABASE_PASSWORD);
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: process.env.DATABASE_HOST,
