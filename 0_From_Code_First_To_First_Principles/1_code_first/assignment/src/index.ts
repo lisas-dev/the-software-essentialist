@@ -2,8 +2,6 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import { createUser, updateUser, getUserByEmail } from './controllers/userController';
-import { RequestResult } from "./models/RequestResult";
-
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
 import { User } from "./models/User";
