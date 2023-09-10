@@ -14,24 +14,29 @@ const port = process.env.PORT || 5000;
 
 app.post('/users/new', async (req: Request, res: Response) => {
     const result = await createUser(req.body);
-    res.status(result.responseCode).json(result);
+    var responseCode : number = 500;
+    if (result?.responseCode != undefined)
+    {
+        responseCode = result.responseCode;
+    }
+    res.status(responseCode).json(result?.responseJson);
 })
 
 app.post('/users/edit/:userId', async (req: Request, res: Response) => {
     const userId = Number(req.params.userId);
     const result = await updateUser(userId, req.body);
-    res.status(result.responseCode).json(result);
+    var responseCode : number = 500;
+    if (result?.responseCode != undefined)
+    {
+        responseCode = result.responseCode;
+    }
+    res.status(responseCode).json(result?.responseJson);
 });
 
 app.get('/users', async (req: Request, res: Response) => {
     const userEmail = req.query.email?.toString() ?? "";
     const result = await getUserByEmail(userEmail);
-    if (result instanceof User) {
-        res.status(200).json(result);
-    }
-    else {
-        res.status(result.responseCode).json(result);
-    }
+    res.status(result.responseCode).json(result.responseJson);
 })
 
 app.listen(port, () => {

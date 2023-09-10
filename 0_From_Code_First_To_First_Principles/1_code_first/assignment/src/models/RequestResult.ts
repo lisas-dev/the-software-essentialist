@@ -1,11 +1,15 @@
 export class RequestResult {
     responseCode: number;
-    success: boolean;
-    message: string;
+    responseJson: JSON;
 
-    constructor(responseCode = 500, success = false, message = "") {
+    constructor(responseCode : number = 500, success : boolean = false, error : string = "", data : any = undefined) {
         this.responseCode = responseCode;
-        this.success = success;
-        this.message = message;
+        this.responseJson = <JSON><unknown> {
+            "error": error,
+            "data": data,
+            "success": success
+        };
     }
+
+    
 }
